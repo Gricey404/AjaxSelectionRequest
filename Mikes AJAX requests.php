@@ -125,3 +125,42 @@ Please enter a description for your drill in the box below
 </h2> 
 </br>
 </div>
+
+
+
+
+// new ajax request 
+
+
+function category_select_change() {
+	jQuery.ajax({
+	type: 'post',
+	url: 'https://fbdna.lincswebdev.co.uk/Hello.php',
+	data: {
+		mainCategory : jQuery("#mainCategorySel").val(),
+		category:  jQuery("#categorySel").val()
+	},
+	success: function (response) {
+		$( '#pitchhead' ).html(response);    
+	
+		$('.pitchImg').click(function() {
+var url = $(this).data('url');
+console.log(url);
+/* tinymce.activeEditor.insertContent('<img src="' + url + '" style="width:367px; height:100%;"/> &nbsp; '); */
+});
+	},
+	
+	error: function (d) {
+		console.log(d);
+	}
+	});
+}
+
+// Whenever either of the select boxes are changed
+// Call the same function and send both values
+
+jQuery(function () {
+	jQuery("#mainCategorySel, #categorySel").change(function() {
+		category_select_change();
+	});
+});
